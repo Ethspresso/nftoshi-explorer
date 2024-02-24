@@ -1,3 +1,3 @@
-# Linktree
+# NFToshi Explorer
 
-A single page with links. Also supports the Farcaster frame specification.
+A Farcaster frame for exploring the NFToshi collection.
