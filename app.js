@@ -5,9 +5,9 @@ const path = require('path');
 const helpers = require('./helpers');
 const data = require('./data');
 
+// Initialize Express.js app
 const app = express();
-const port = 3000;
-
+const port = 8000;
 app.set('view engine', 'ejs');
 
 // Set up static files directory
