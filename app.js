@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/random', (req, res) => {
+app.post('/random', (req, res) => {
     const tokenId = Math.floor(Math.random() * 3001)
     const data = {
         tokenId: tokenId,
@@ -28,7 +28,7 @@ app.get('/random', (req, res) => {
     res.render('random', data);
 });
 
-app.get('/rarity/:idx', (req, res) => {
+app.post('/rarity/:idx', (req, res) => {
     const tokenId = data.rankByRarity[parseInt(req.params.idx)];
     const data = {
         tokenId: tokenId,
