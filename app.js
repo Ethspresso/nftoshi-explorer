@@ -22,8 +22,8 @@ app.post('/random', (req, res) => {
     const tokenId = Math.floor(Math.random() * 3001)
     const payload = {
         tokenId: tokenId,
-        tokenImg: helpers.imgUrl(tokenId),
-        marketplaceUrl: helpers.marketplaceUrl(tokenId)
+        tokenImg: helpers.getImgUrl(tokenId),
+        marketplaceUrl: helpers.getMarketplaceUrl(tokenId)
     };
     res.render('random', payload);
 });
@@ -32,8 +32,8 @@ app.post('/rarity/:idx', (req, res) => {
     const tokenId = data.rankByRarity[parseInt(req.params.idx)];
     const payload = {
         tokenId: tokenId,
-        tokenImg: helpers.imgUrl(tokenId),
-        marketplaceUrl: helpers.marketplaceUrl(tokenId)
+        tokenImg: helpers.getImgUrl(tokenId),
+        marketplaceUrl: helpers.getMarketplaceUrl(tokenId)
     };
     res.render('rarity', payload);
 });
