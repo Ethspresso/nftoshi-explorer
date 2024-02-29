@@ -20,22 +20,22 @@ app.get('/', (req, res) => {
 
 app.post('/random', (req, res) => {
     const tokenId = Math.floor(Math.random() * 3001)
-    const data = {
+    const payload = {
         tokenId: tokenId,
         tokenImg: helpers.imgUrl(tokenId),
         marketplaceUrl: helpers.marketplaceUrl(tokenId)
     };
-    res.render('random', data);
+    res.render('random', payload);
 });
 
 app.post('/rarity/:idx', (req, res) => {
     const tokenId = data.rankByRarity[parseInt(req.params.idx)];
-    const data = {
+    const payload = {
         tokenId: tokenId,
         tokenImg: helpers.imgUrl(tokenId),
         marketplaceUrl: helpers.marketplaceUrl(tokenId)
     };
-    res.render('rarity', data);
+    res.render('rarity', payload);
 });
 
 // Handle unknown routes
