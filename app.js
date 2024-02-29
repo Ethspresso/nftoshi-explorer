@@ -5,6 +5,9 @@ const path = require('path');
 const helpers = require(path.join(__dirname, 'helpers'));
 const data = require(path.join(__dirname, 'data'));
 
+// Settings
+const APP_URL = "https://nftoshi-explorer-ethspresso.koyeb.app";
+
 // Initialize Express.js app
 const app = express();
 const port = 8000;
@@ -21,6 +24,7 @@ app.get('/', (req, res) => {
 app.post('/random', (req, res) => {
     const tokenId = Math.floor(Math.random() * 3001)
     const payload = {
+        url: APP_URL,
         tokenId: tokenId,
         tokenImg: helpers.getImgUrl(tokenId),
         marketplaceUrl: helpers.getMarketplaceUrl(tokenId)
@@ -31,12 +35,30 @@ app.post('/random', (req, res) => {
 app.post('/rarity/:idx', (req, res) => {
     const tokenId = data.rankByRarity[parseInt(req.params.idx)];
     const payload = {
+        url: APP_URL,
         tokenId: tokenId,
         tokenImg: helpers.getImgUrl(tokenId),
         marketplaceUrl: helpers.getMarketplaceUrl(tokenId),
         nextIndex: parseInt(req.params.idx) + 1
     };
     res.render('rarity', payload);
+});
+
+app.post('/traits/:key/:value/:idx', (req, res) => {
+    const tokenId = 0; // TODO
+    const payload = {
+        url: APP_URL,
+        tokenId: tokenId,
+        tokenImg: helpers.getImgUrl(tokenId),
+        marketplaceUrl: helpers.getMarketplaceUrl(tokenId),
+        currentTrait: req.params.key,
+        currentValue: req.params.value,
+        nextIndex: parseInt(req.params.idx) + 1,
+        nextValue: "", // TODO: Next value for same trait
+        newTrait: "", // TODO: New trait to explore
+        newTraitValue: "" // TODO: Value for new trait
+    };
+    res.render('traits', payload);
 });
 
 // Handle unknown routes

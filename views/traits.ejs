@@ -15,15 +15,21 @@
 
   <!-- Current page -->
   <meta property="fc:frame:image" content="<%= tokenImg %>" />
-  <meta property="fc:frame:button:1" content="Next: Rank <%= nextIndex %>" />
+  <meta property="fc:frame:button:1" content="Another <%= currentTrait %>: <%= currentValue %>" />
   <meta property="fc:frame:button:1:action" content="post" />
-  <meta property="fc:frame:button:1:target" content="<%= url %>/rarity/<%= nextIndex %>" />
-  <meta property="fc:frame:button:2" content="Marketplace" />
-  <meta property="fc:frame:button:2:action" content="link" />
-  <meta property="fc:frame:button:2:target" content="<%= marketplaceUrl %>" />
-  <meta property="fc:frame:button:3" content="Home" />
+  <meta property="fc:frame:button:1:target" content="<%= url %>/rarity/<%= currentTrait %>/<%= currentValue %>/<%= nextIndex %>" />
+  <meta property="fc:frame:button:2" content="Next <%= currentTrait %>: <%= nextValue %>" />
+  <meta property="fc:frame:button:2:action" content="post" />
+  <meta property="fc:frame:button:2:target" content="<%= url %>/rarity/<%= currentTrait %>/<%= nextValue %>/0" />
+  <meta property="fc:frame:button:3" content="Next trait: <%= newTrait %>" />
   <meta property="fc:frame:button:3:action" content="post" />
-  <meta property="fc:frame:button:3:target" content="<%= url %>/" />
+  <meta property="fc:frame:button:3:target" content="<%= url %>/rarity/<%= newTrait %>/<%= newTraitValue %>/0" />
+  <meta property="fc:frame:button:4" content="Marketplace" />
+  <meta property="fc:frame:button:4:action" content="link" />
+  <meta property="fc:frame:button:4:target" content="<%= marketplaceUrl %>" />
+  <meta property="fc:frame:button:5" content="Home" />
+  <meta property="fc:frame:button:5:action" content="post" />
+  <meta property="fc:frame:button:5:target" content="<%= url %>/" />
 </head>
 
 <body>
