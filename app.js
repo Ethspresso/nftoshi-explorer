@@ -33,7 +33,8 @@ app.post('/rarity/:idx', (req, res) => {
     const payload = {
         tokenId: tokenId,
         tokenImg: helpers.getImgUrl(tokenId),
-        marketplaceUrl: helpers.getMarketplaceUrl(tokenId)
+        marketplaceUrl: helpers.getMarketplaceUrl(tokenId),
+        nextIndex: parseInt(req.params.idx) + 1
     };
     res.render('rarity', payload);
 });
