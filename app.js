@@ -16,11 +16,17 @@ app.set('view engine', 'ejs');
 // Set up static files directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define routes
+// Index page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Index page via POST because frames mainly use POST
+app.post('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Random tokens
 app.post('/random', (req, res) => {
     const tokenId = Math.floor(Math.random() * 3001)
     const payload = {
@@ -32,6 +38,7 @@ app.post('/random', (req, res) => {
     res.render('random', payload);
 });
 
+// Most rare tokens
 app.post('/rarity/:idx', (req, res) => {
     const tokenId = data.rankByRarity[parseInt(req.params.idx)];
     const payload = {
@@ -44,6 +51,7 @@ app.post('/rarity/:idx', (req, res) => {
     res.render('rarity', payload);
 });
 
+// Tokens by trait (key: value)
 app.post('/traits/:key/:value/:idx', (req, res) => {
     const tokenId = 0; // TODO
     const payload = {
