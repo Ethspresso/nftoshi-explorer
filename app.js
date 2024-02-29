@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 
 // Custom modules
-const helpers = require('./helpers');
-const data = require('./data');
+const helpers = require(path.join(__dirname, 'helpers'));
+const data = require(path.join(__dirname, 'data'));
 
 // Initialize Express.js app
 const app = express();
