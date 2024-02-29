@@ -46,7 +46,8 @@ app.post('/rarity/:idx', (req, res) => {
         tokenId: tokenId,
         tokenImg: helpers.getImgUrl(tokenId),
         marketplaceUrl: helpers.getMarketplaceUrl(tokenId),
-        nextIndex: parseInt(req.params.idx) + 1
+        nextIndex: parseInt(req.params.idx) + 1,
+        nextIndexDisplay: parseInt(req.params.idx) + 2  // Indices start at zero
     };
     res.render('rarity', payload);
 });
@@ -62,6 +63,7 @@ app.post('/traits/:key/:value/:idx', (req, res) => {
         currentTrait: req.params.key,
         currentValue: req.params.value,
         nextIndex: parseInt(req.params.idx) + 1,
+        nextIndexDisplay: parseInt(req.params.idx) + 2,  // Indices start at zero
         nextValue: "", // TODO: Next value for same trait
         newTrait: "", // TODO: New trait to explore
         newTraitValue: "" // TODO: Value for new trait
