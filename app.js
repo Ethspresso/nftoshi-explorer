@@ -54,19 +54,25 @@ app.post('/rarity/:idx', (req, res) => {
 
 // Tokens by trait (key: value)
 app.post('/traits/:key/:value/:idx', (req, res) => {
-    const tokenId = 0; // TODO
+    const trait_key = req.params.key.replace("_", " ");
+    const trait_key_idx = data.traitList.index(trait_key);
+    const trait_value = req.params.value.replace("_", " ");
+    const trait_value_idx = data.traitVariants[trait_key].index(trait_value);
+    const trait_lookupkey = trait_key + ": " + trait_value;
+
+    const tokenId = data.traitToTokenIDs[trait_lookupkey][req.params.idx];
     const payload = {
         url: APP_URL,
         tokenId: tokenId,
         tokenImg: helpers.getImgUrl(tokenId),
         marketplaceUrl: helpers.getMarketplaceUrl(tokenId),
-        currentTrait: req.params.key,
-        currentValue: req.params.value,
+        currentTrait: trait_key,
+        currentValue: trait_value,
         nextIndex: parseInt(req.params.idx) + 1,
         nextIndexDisplay: parseInt(req.params.idx) + 2,  // Indices start at zero
-        nextValue: "", // TODO: Next value for same trait
-        newTrait: "", // TODO: New trait to explore
-        newTraitValue: "" // TODO: Value for new trait
+        nextValue: data.traitVariants[trait_key][trait_value_idx + 1], // Next value for same trait
+        newTrait: data.traitList[trait_key_idx + 1], // New trait to explore
+        newTraitValue: data.traitVariants[data.traitList[trait_key_idx + 1]][0] // Value for new trait
     };
     res.render('traits', payload);
 });
