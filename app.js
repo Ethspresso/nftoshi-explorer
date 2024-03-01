@@ -70,9 +70,9 @@ app.post('/traits/:key/:value/:idx', (req, res) => {
         currentValue: trait_value,
         nextIndex: parseInt(req.params.idx) + 1,
         nextIndexDisplay: parseInt(req.params.idx) + 2,  // Indices start at zero
-        nextValue: data.traitVariants[trait_key][trait_value_idx + 1], // Next value for same trait
-        newTrait: data.traitList[trait_key_idx + 1], // New trait to explore
-        newTraitValue: data.traitVariants[data.traitList[trait_key_idx + 1]][0] // Value for new trait
+        nextValue: data.traitVariants[trait_key][trait_value_idx + 1].replace(" ", "_"), // Next value for same trait
+        newTrait: data.traitList[trait_key_idx + 1].replace(" ", "_"), // New trait to explore
+        newTraitValue: data.traitVariants[data.traitList[trait_key_idx + 1]][0].replace(" ", "_") // Value for new trait
     };
     res.render('traits', payload);
 });
