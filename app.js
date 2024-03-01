@@ -55,9 +55,9 @@ app.post('/rarity/:idx', (req, res) => {
 // Tokens by trait (key: value)
 app.post('/traits/:key/:value/:idx', (req, res) => {
     const trait_key = req.params.key.replace("_", " ");
-    const trait_key_idx = data.traitList.index(trait_key);
+    const trait_key_idx = data.traitList.indexOf(trait_key);
     const trait_value = req.params.value.replace("_", " ");
-    const trait_value_idx = data.traitVariants[trait_key].index(trait_value);
+    const trait_value_idx = data.traitVariants[trait_key].indexOf(trait_value);
     const trait_lookupkey = trait_key + ": " + trait_value;
 
     const tokenId = data.traitToTokenIDs[trait_lookupkey][req.params.idx];
