@@ -60,6 +60,16 @@ app.post('/traits/:key/:value/:idx', (req, res) => {
     const trait_value_idx = data.traitVariants[trait_key].indexOf(trait_value);
     const trait_lookupkey = trait_key + ": " + trait_value;
 
+    // Wrap around when we reach end of lists
+    let next_trait_value_idx = trait_value_idx + 1;
+    if (next_trait_value_idx >= data.traitVariants[trait_key].length) {
+        next_trait_value_idx = 0;
+    }
+    let next_trait_key_idx = trait_key_idx + 1;
+    if (next_trait_key_idx >= data.traitList.length) {
+        next_trait_key_idx = 0;
+    }
+
     const tokenId = data.traitToTokenIDs[trait_lookupkey][req.params.idx];
     const payload = {
         url: APP_URL,
@@ -70,9 +80,9 @@ app.post('/traits/:key/:value/:idx', (req, res) => {
         currentValue: trait_value,
         nextIndex: parseInt(req.params.idx) + 1,
         nextIndexDisplay: parseInt(req.params.idx) + 2,  // Indices start at zero
-        nextValue: data.traitVariants[trait_key][trait_value_idx + 1].replace(" ", "_"), // Next value for same trait
-        newTrait: data.traitList[trait_key_idx + 1].replace(" ", "_"), // New trait to explore
-        newTraitValue: data.traitVariants[data.traitList[trait_key_idx + 1]][0].replace(" ", "_") // Value for new trait
+        nextValue: data.traitVariants[trait_key][next_trait_value_idx].replace(" ", "_"), // Next value for same trait
+        newTrait: data.traitList[next_trait_key_idx].replace(" ", "_"), // New trait to explore
+        newTraitValue: data.traitVariants[data.traitList[next_trait_key_idx]][0].replace(" ", "_") // Value for new trait
     };
     res.render('traits', payload);
 });
