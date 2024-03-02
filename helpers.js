@@ -1,6 +1,5 @@
 const MARKETPLACE_URL = "https://opensea.io/assets";
-//const IPFS_PROVIDER_URL = "https://cloudflare-ipfs.com/ipfs";
-const IPFS_PROVIDER_URL = "https://ipfs.io/ipfs";
+const IPFS_PROVIDER_URL = "https://cloudflare-ipfs.com/ipfs";
 
 const COLLECTION_NETWORK = "base";
 const COLLECTION_CONTRACT = "0xbdb1a8772409a0c5eeb347060cbf4b41dd7b2c62";
