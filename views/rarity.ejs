@@ -27,13 +27,19 @@
   <meta property="fc:frame:button:3:target" content="<%= url %>/" />
 </head>
 
+<!-- Fallback content if frame is clicked -->
 <body>
   <div class="container text-center">
     <h1 class="display-1">NFToshi Explorer</h1>
-    <p>A Farcaster frame for exploring the NFToshi collection. Cast the URL to this page to use it!</p>
+    <h3 class="display-3">This is NFToshi #<%= tokenId %></h3>
+    <p><a href="<%= marketplaceUrl %>"><img src="<%= tokenImg %>" height="500" width="500"/></a></p>
+    <h5 class="display-5"><a href="<%= marketplaceUrl %>">View on Opensea</a></h5>
+    <p></p>
+    <h3 class="display-3">About this frame</h3>
+    <p>This is a Farcaster frame for exploring the NFToshi collection. Cast the URL to this page to use it!</p>
     <p>Make sure to also check out the <a href="https://www.toshithecat.com/nftoshis">official collection homepage</a>.
     </p>
-    <p>Made by <a href="https://ethspresso-linktree.replit.app/">Ethspresso</a>.</p>
+    <p>Made by <a href="https://warpcast.com/ethspresso.eth">Ethspresso</a>. Reach out if you want a frame like this for another collection.</p>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </div>
 </body>
