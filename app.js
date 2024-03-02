@@ -54,15 +54,18 @@ app.post('/rarity/:idx', (req, res) => {
 
 // Tokens by trait (key: value)
 app.post('/traits/:key/:value/:idx', (req, res) => {
-    const traitKey = req.params.key.replace("_", " ");
-    const traitKeyIndex = data.traitList.indexOf(traitKey);
-    const traitValue = req.params.value.replace("_", " ");
-    const traitValueIndex = data.traitVariants[traitKey].indexOf(traitValue);
-    const traitLookupKey = traitKey + ": " + traitValue;
+    const traitKey = req.params.key;
+    const traitKeyDisplay = traitKey.replace("_", " ");
+    const traitKeyIndex = data.traitList.indexOf(traitKeyDisplay);
+    const traitValue = req.params.value;
+    const traitValueDisplay = traitValue.replace("_", " ");
+    const traitValueIndex = data.traitVariants[traitKeyDisplay].indexOf(traitValueDisplay);
+    const traitLookupKey = traitKeyDisplay + ": " + traitValueDisplay;
+    const tokenId = data.traitToTokenIDs[traitLookupKey][req.params.idx];
 
     // Wrap around when we reach end of lists
     let nextTraitValueIndex = traitValueIndex + 1;
-    if (nextTraitValueIndex >= data.traitVariants[traitKey].length) {
+    if (nextTraitValueIndex >= data.traitVariants[traitKeyDisplay].length) {
         nextTraitValueIndex = 0;
     }
     let nextTraitKeyIndex = traitKeyIndex + 1;
@@ -70,19 +73,28 @@ app.post('/traits/:key/:value/:idx', (req, res) => {
         nextTraitKeyIndex = 0;
     }
 
-    const tokenId = data.traitToTokenIDs[traitLookupKey][req.params.idx];
+    // Determine next item
+    const nextValueDisplay = data.traitVariants[traitKeyDisplay][nextTraitValueIndex];
+    const newTraitDisplay = data.traitList[nextTraitKeyIndex];
+    const newTraitValueDisplay = data.traitVariants[data.traitList[nextTraitKeyIndex]][0];
+
     const payload = {
         url: APP_URL,
         tokenId: tokenId,
         tokenImg: helpers.getImgUrl(tokenId),
         marketplaceUrl: helpers.getMarketplaceUrl(tokenId),
-        currentTrait: traitKey,
-        currentValue: traitValue,
+        traitKey: traitKey,
+        traitKeyDisplay: traitKeyDisplay,
+        traitValue: traitValue,
+        traitValueDisplay: traitValueDisplay,
         nextIndex: parseInt(req.params.idx) + 1,
         nextIndexDisplay: parseInt(req.params.idx) + 2,  // Indices start at zero
-        nextValue: data.traitVariants[traitKey][nextTraitValueIndex].replace(" ", "_"), // Next value for same trait
-        newTrait: data.traitList[nextTraitKeyIndex].replace(" ", "_"), // New trait to explore
-        newTraitValue: data.traitVariants[data.traitList[nextTraitKeyIndex]][0].replace(" ", "_") // Value for new trait
+        nextValue: nextValueDisplay.replace(" ", "_"), // Next value for same trait
+        nextValueDisplay: nextValueDisplay,
+        newTrait: newTraitDisplay.replace(" ", "_"), // New trait to explore
+        newTraitDisplay: newTraitDisplay,
+        newTraitValue: newTraitValueDisplay.replace(" ", "_"), // Value for new trait
+        newTraitValueDisplay: newTraitValueDisplay
     };
     res.render('traits', payload);
 });
