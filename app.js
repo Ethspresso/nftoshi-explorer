@@ -26,6 +26,12 @@ app.post('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Serve images
+app.get('/img/:fname', (req, res) => {
+    res.set('Content-Type', 'image/png');
+    res.sendFile(path.join(__dirname, 'public', 'img', fname));
+});
+
 // Random tokens
 app.post('/random', (req, res) => {
     const tokenId = Math.floor(Math.random() * 3001)
